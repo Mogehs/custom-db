@@ -3,6 +3,7 @@ import {
   normalizeVehicleData,
   fieldMap,
 } from "../utils/mapping-normalization.js";
+import fetchAndStoreVehicles from "../utils/fuelEconomyFunction.js";
 
 const deepMergePreserve = (existing, incoming) => {
   for (const key in incoming) {
@@ -426,6 +427,22 @@ export const updateIfExistsInChargeLabs = async (vehiclesData) => {
         error.message
       );
     }
+  }
+};
+
+//apis controller
+
+export const fetchAndAddFuelVehicles = async (req, res) => {
+  try {
+    await fetchAndStoreVehicles();
+    res.status(200).json({
+      message: "Added the data completely to fuels",
+    });
+  } catch (e) {
+    console.log(e);
+    res.status.json({
+      message: "Faild to fetch and store fuel economy data",
+    });
   }
 };
 

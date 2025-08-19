@@ -35,8 +35,6 @@ const fetchVehicleData = async (id) => {
 
 const fetchAndStoreVehicles = async () => {
   const bulkData = [];
-  // 49129 is the latest vehicle ID
-  // Loop through all vehicle IDs from 0 to 49130
   for (let id = 0; id <= 49130; id++) {
     const vehicleData = await fetchVehicleData(id);
     if (vehicleData && vehicleData.vehicle) {
