@@ -6,6 +6,10 @@
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
+    "fuel-sync:start": "curl -X POST http://localhost:3000/api/fuel-sync/start -H \"Content-Type: application/json\"",
+    "fuel-sync:run-now": "curl -X POST http://localhost:3000/api/fuel-sync/run-now -H \"Content-Type: application/json\"",
+    "fuel-sync:status": "curl http://localhost:3000/api/fuel-sync/status",
+    "fuel-sync:stop": "curl -X POST http://localhost:3000/api/fuel-sync/stop",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,6 +22,7 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "mongoose": "^8.17.0",
+    "node-cron": "^4.2.1",
     "xml2js": "^0.6.2"
   }
 }
