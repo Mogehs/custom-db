@@ -455,3 +455,41 @@ export const getChargeLabsVehicles = async (req, res) => {
     throw error;
   }
 };
+
+export const getVehicle = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        message: "Vehicle ID is required",
+      });
+    }
+
+    // Find vehicle by MongoDB document _id
+    const vehicle = await ChargeLab.findById(id);
+
+    if (!vehicle) {
+      return res.status(404).json({
+        success: false,
+        message: `Vehicle with ID ${id} not found`,
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: vehicle,
+    });
+  } catch (error) {
+    console.error(
+      `❌ Failed to retrieve vehicle with ID ${req.params.id}:`,
+      error.message
+    );
+    res.status(500).json({
+      success: false,
+      message: "Internal server error while retrieving vehicle",
+      error: error.message,
+    });
+  }
+};

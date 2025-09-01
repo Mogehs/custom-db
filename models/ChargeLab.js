@@ -25,7 +25,7 @@ const wheelVariantSchema = new mongoose.Schema(
     },
   },
   { _id: false }
-); // No need for subdocument IDs unless you want them
+); 
 
 const chargeLabSchema = new mongoose.Schema({
   vehicle: {
