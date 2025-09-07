@@ -456,6 +456,30 @@ export const getChargeLabsVehicles = async (req, res) => {
   }
 };
 
+export const getChargeLabsVehiclesByQuery = async (req, res) => {
+  try {
+    const { make, model, year } = req.query;
+
+    const query = {};
+    if (make) query["vehicle.make"] = make;
+    if (model) query["vehicle.model"] = model;
+    if (year) query["vehicle.year"] = year;
+
+    const vehicles = await ChargeLab.find(query);
+    res.status(200).json(vehicles);
+  } catch (error) {
+    console.error(
+      `❌ Failed to retrieve Charge Labs vehicles by query:`,
+      error.message
+    );
+    res.status(500).json({
+      success: false,
+      message: "Internal server error while retrieving vehicles",
+      error: error.message,
+    });
+  }
+};
+
 export const getVehicle = async (req, res) => {
   try {
     const { id } = req.params;
